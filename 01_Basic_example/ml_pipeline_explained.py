@@ -1,54 +1,30 @@
-import numpy as np
-import pandas as pd
-import pickle
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
+# https://github.com/slundberg/shap
+import xgboost
+import shap
 
-training_data = pd.read_csv('storepurchasedata.csv')
+# train an XGBoost model
+X, y = shap.datasets.boston()
+model = xgboost.XGBRegressor().fit(X, y)
 
-training_data.describe()
+# explain the model's predictions using SHAP
+# (same syntax works for LightGBM, CatBoost, scikit-learn, transformers, Spark, etc.)
+explainer = shap.Explainer(model)
+shap_values = explainer(X)
 
-X = training_data.iloc[:, :-1].values
-y = training_data.iloc[:, -1].values
+# visualize the first prediction's explanation
+shap.plots.waterfall(shap_values[0])
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.20, random_state=0)
+# visualize the first prediction's explanation with a force plot
+shap.plots.force(shap_values[0])
 
-sc = StandardScaler()
-X_train = sc.fit_transform(X_train)
-X_test = sc.transform(X_test)
+# visualize all the training set predictions
+shap.plots.force(shap_values)
 
-# minkowski is for ecledian distance
-classifier = KNeighborsClassifier(n_neighbors=5, metric='minkowski', p=2)
+# create a dependence scatter plot to show the effect of a single feature across the whole dataset
+shap.plots.scatter(shap_values[:,"RM"], color=shap_values)
 
-# Model training
-classifier.fit(X_train, y_train)
+# summarize the effects of all the features
+shap.plots.beeswarm(shap_values)
 
-y_pred = classifier.predict(X_test)
-y_prob = classifier.predict_proba(X_test)[:, 1]
+shap.plots.bar(shap_values)
 
-cm = confusion_matrix(y_test, y_pred)
-
-print(accuracy_score(y_test, y_pred))
-
-print(classification_report(y_test, y_pred))
-
-new_prediction = classifier.predict(sc.transform(np.array([[40, 20000]])))
-
-new_prediction_proba = classifier.predict_proba(sc.transform(np.array([[40, 20000]])))[:, 1]
-
-new_pred = classifier.predict(sc.transform(np.array([[42, 50000]])))
-
-new_pred_proba = classifier.predict_proba(sc.transform(np.array([[42, 50000]])))[:, 1]
-
-# Picking the Model and Standard Scaler
-
-
-model_file = "classifier.pickle"
-
-pickle.dump(classifier, open(model_file, 'wb'))
-
-scaler_file = "sc.pickle"
-
-pickle.dump(sc, open(scaler_file, 'wb'))
