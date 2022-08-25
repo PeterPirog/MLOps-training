@@ -16,6 +16,9 @@ def hello_world():
     print(salary)
     pred_proba = local_classifier.predict_proba(local_scaler.transform(np.array([[age,salary]])))[:,1]
     return "The prediction is {}".format(pred_proba)
+@app.route('/')
+def index():
+    return '<h1> This is script with ML API <h1>'
 
 if __name__ == "__main__":
     app.run(port=8005, debug=True)
