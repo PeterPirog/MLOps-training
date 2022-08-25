@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
 
-training_data = pd.read_csv('storepurchasedata.csv')
+training_data = pd.read_csv('storepurchasedata_large.csv')
 
 training_data.describe()
 
