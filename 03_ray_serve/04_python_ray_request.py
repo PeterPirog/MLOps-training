@@ -1,6 +1,9 @@
 # http://www.lac.inpe.br/~rafael.santos/Docs/CAP394/WholeStory-Iris.html
 #
-# run server first
+# run server firstredis stop
+# pip install mlflow-ray-serve
+# ray start --head
+#
 #mlflow models serve -m file:///G:/PycharmProject/MLOps-training/03_ray_serve/mlruns/0/34a261edacb844b8a5a31376dd25e189/artifacts/iris_rf
 
 #
