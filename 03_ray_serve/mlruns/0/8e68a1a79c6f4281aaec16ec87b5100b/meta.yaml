@@ -1,0 +1,15 @@
+artifact_uri: file:///E:/PycharmProjects/MLOps-training/03_ray_serve/mlruns/0/8e68a1a79c6f4281aaec16ec87b5100b/artifacts
+end_time: 1661541168888
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: 8e68a1a79c6f4281aaec16ec87b5100b
+run_uuid: 8e68a1a79c6f4281aaec16ec87b5100b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1661541163803
+status: 3
+tags: []
+user_id: Przemek
