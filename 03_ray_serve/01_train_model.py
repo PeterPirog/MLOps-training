@@ -7,6 +7,7 @@ import mlflow
 import mlflow.sklearn
 from mlflow.models.signature import infer_signature
 
+# mlflow server --backend-store-uri file://E:\PycharmProjects\MLOps-training\03_ray_serve\mlruns/
 
 
 iris = datasets.load_iris()
