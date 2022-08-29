@@ -3,8 +3,10 @@
 # run server firstredis stop
 # pip install mlflow-ray-serve
 # ray start --head
-#
+#serve start # Start a detached Ray Serve ins
+
 #mlflow models serve -m file:///G:/PycharmProject/MLOps-training/03_ray_serve/mlruns/0/34a261edacb844b8a5a31376dd25e189/artifacts/iris_rf
+# mlflow deployments create -t ray-serve -m file:///G:/PycharmProject/MLOps-training/03_ray_serve/mlruns/0/34a261edacb844b8a5a31376dd25e189/artifacts/iris_rf --name ray_deployment -C num_replicas=1
 
 #
 import requests
